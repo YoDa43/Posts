@@ -14,8 +14,8 @@ class WallServiceTest {
         // создаём целевой сервис
         val service = WallService
         // заполняем несколькими постами
-        service.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", 1, true, true, true, true, Reposts(10, true, 1), Answer(1, 1)))
-        service.add(Post(2, 1, 1, 2, "Новый год", 1, true, true, true, true, Reposts(10, true, 2), Answer(1, 1)))
+        service.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", 1, true, true, true, true, Reposts(10, true, 1), Answer(1, 1), emptyArray()))
+        service.add(Post(2, 1, 1, 2, "Новый год", 1, true, true, true, true, Reposts(10, true, 2), Answer(1, 1), emptyArray()))
         // проверяем результат (используйте assertTrue или assertFalse)
         assertTrue(service.posts.isNotEmpty())
     }
@@ -25,10 +25,10 @@ class WallServiceTest {
         // создаём целевой сервис
         val service = WallService
         // заполняем несколькими постами
-        service.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", 1, true, true, true, true, Reposts(10, true, 1), Answer(1, 1)))
-        service.add(Post(2, 1, 1, 2, "Новый год", 1, true, true, true, true, Reposts(10, true, 2), Answer(1, 1)))
+        service.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", 1, true, true, true, true, Reposts(10, true, 1), Answer(1, 1), emptyArray()))
+        service.add(Post(2, 1, 1, 2, "Новый год", 1, true, true, true, true, Reposts(10, true, 2), Answer(1, 1), emptyArray()))
         // создаём информацию об обновлении
-        val update = Post(2, 1, 1, 2, "Новый год", 5, true, true, true, true, Reposts(10, true, 2), Answer(3, 1))
+        val update = Post(2, 1, 1, 2, "Новый год", 5, true, true, true, true, Reposts(10, true, 2), Answer(3, 1), emptyArray())
 
         // выполняем целевое действие
         val result = service.update(update)
@@ -39,10 +39,10 @@ class WallServiceTest {
         // создаём целевой сервис
         val service = WallService
         // заполняем несколькими постами
-        service.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", 1, true, true, true, true, Reposts(10, true, 1), Answer(1, 1)))
-        service.add(Post(2, 1, 1, 2, "Новый год", 1, true, true, true, true, Reposts(10, true, 2), Answer(1, 1)))
+        service.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", 1, true, true, true, true, Reposts(10, true, 1), Answer(1, 1), emptyArray()))
+        service.add(Post(2, 1, 1, 2, "Новый год", 1, true, true, true, true, Reposts(10, true, 2), Answer(1, 1), emptyArray()))
         // создаём информацию об обновлении
-        val update = Post(3, 1, 1, 2, "Новый год", 5, true, true, true, true, Reposts(10, true, 2), Answer(3, 1))
+        val update = Post(3, 1, 1, 2, "Новый год", 5, true, true, true, true, Reposts(10, true, 2), Answer(3, 1), emptyArray())
 
         // выполняем целевое действие
         val result = service.update(update)
