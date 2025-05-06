@@ -12,9 +12,9 @@ data class Post(
     val canDelete: Boolean,  //Информация о том, может ли текущий пользователь удалить запись. Возможные значения: 1 — может, 0 — не может.
     val canEdit: Boolean,  //Информация о том, может ли текущий пользователь редактировать запись. Возможные значения: 1 — может, 0 — не может.
     val isPinned: Boolean,  //Информация о том, прикреплена ли запись. Возможные значения: 1 — запись прикреплена, 0 — запись не прикреплена.
-    val reposts: Reposts,
-    val answer: Answer,
-    val attachments: Array<Attachment> = emptyArray()
+    val reposts: Reposts, //Информация о репостах записи.
+    val answer: Answer, //Ответ на запись.
+    val attachments: Array<Attachment> //Массив объектов, описывающих прикрепленные к записи медиафайлы.
 )
 
 object WallService {
@@ -57,9 +57,9 @@ data class Photo(
     val ownerId: Int,
     val userId: Int,
     val text: String,
-) : Attachment("photo")
+)
 
-data class PhotoAttachments(val photo: Photo)
+data class PhotoAttachments(val photo: Photo): Attachment("photo")
 
 data class Video(
     val id: Int,
@@ -67,9 +67,9 @@ data class Video(
     val title: String,
     val duration: Int,
     val description: String,
-) : Attachment("video")
+)
 
-data class VideoAttachments(val video: Video)
+data class VideoAttachments(val video: Video): Attachment("video")
 
 data class Audio(
     val id: Int,
@@ -77,9 +77,9 @@ data class Audio(
     val artist: String,
     val title: String,
     val duration: Int,
-) : Attachment("audio")
+)
 
-data class AudioAttachments(val audio: Audio)
+data class AudioAttachments(val audio: Audio): Attachment("audio")
 
 data class File(
     val id: Int,
@@ -88,9 +88,9 @@ data class File(
     val size: Int,
     val ext: String,
     val url: String,
-) : Attachment("file")
+)
 
-data class FileAttachments(val file: File)
+data class FileAttachments(val file: File): Attachment("file")
 
 data class History(
     val id: Int,
@@ -98,9 +98,9 @@ data class History(
     val date: Int,
     val text: String,
     val isDeleted: Boolean,
-) : Attachment("history")
+)
 
-data class HistoryAttachments(val history: History)
+data class HistoryAttachments(val history: History): Attachment("history")
 
 fun main() {
     WallService.clear()
