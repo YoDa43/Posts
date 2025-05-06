@@ -1,5 +1,5 @@
-data class Answer(val id:Int,val date:Int)
-data class Reposts(val count:Int,val userReposted:Boolean,val date:Int)
+data class Answer(val id: Int, val date: Int)
+data class Reposts(val count: Int, val userReposted: Boolean, val date: Int)
 
 data class Post(
     val id: Int,  //Идентификатор записи.
@@ -14,14 +14,16 @@ data class Post(
     val isPinned: Boolean,  //Информация о том, прикреплена ли запись. Возможные значения: 1 — запись прикреплена, 0 — запись не прикреплена.
     val reposts: Reposts,
     val answer: Answer,
-    val attachments: Array<Attachment>
+    val attachments: Array<Attachment> = emptyArray()
 )
+
 object WallService {
     var posts = emptyArray<Post>()
     fun clear() {
         posts = emptyArray<Post>()
         count = 0
     }
+
     private var count = 0
     fun add(post: Post): Post {
         if (post.likes == null) {
@@ -30,6 +32,7 @@ object WallService {
         posts += post.copy(id = ++count)
         return posts.last()
     }
+
     fun update(post: Post): Boolean {
         for ((index, p) in posts.withIndex()) {
             if (p.id == post.id) {
@@ -54,7 +57,8 @@ data class Photo(
     val ownerId: Int,
     val userId: Int,
     val text: String,
-)
+) : Attachment("photo")
+
 data class PhotoAttachments(val photo: Photo)
 
 data class Video(
@@ -63,7 +67,8 @@ data class Video(
     val title: String,
     val duration: Int,
     val description: String,
-)
+) : Attachment("video")
+
 data class VideoAttachments(val video: Video)
 
 data class Audio(
@@ -72,7 +77,8 @@ data class Audio(
     val artist: String,
     val title: String,
     val duration: Int,
-)
+) : Attachment("audio")
+
 data class AudioAttachments(val audio: Audio)
 
 data class File(
@@ -82,7 +88,8 @@ data class File(
     val size: Int,
     val ext: String,
     val url: String,
-)
+) : Attachment("file")
+
 data class FileAttachments(val file: File)
 
 data class History(
@@ -91,13 +98,62 @@ data class History(
     val date: Int,
     val text: String,
     val isDeleted: Boolean,
-    )
+) : Attachment("history")
+
 data class HistoryAttachments(val history: History)
 
 fun main() {
     WallService.clear()
-    WallService.add(Post(1, 1, 1, 1, "Поздравляем Вас с днем рождения", null, true, true, true, true, Reposts(10, true, 1), Answer(1, 1), emptyArray()))
-    WallService.add(Post(1, 1, 1, 2, "Новый год", null, true, true, true, true, Reposts(10, true, 2), Answer(1, 1), emptyArray()))
-    WallService.update(Post(3, 1, 1, 2, "Новый год", null, true, true, true, true, Reposts(10, true, 2), Answer(3, 1), emptyArray()))
+    WallService.add(
+        Post(
+            1,
+            1,
+            1,
+            1,
+            "Поздравляем Вас с днем рождения",
+            null,
+            true,
+            true,
+            true,
+            true,
+            Reposts(10, true, 1),
+            Answer(1, 1),
+            emptyArray()
+        )
+    )
+    WallService.add(
+        Post(
+            1,
+            1,
+            1,
+            2,
+            "Новый год",
+            null,
+            true,
+            true,
+            true,
+            true,
+            Reposts(10, true, 2),
+            Answer(1, 1),
+            emptyArray()
+        )
+    )
+    WallService.update(
+        Post(
+            3,
+            1,
+            1,
+            2,
+            "Новый год",
+            null,
+            true,
+            true,
+            true,
+            true,
+            Reposts(10, true, 2),
+            Answer(3, 1),
+            emptyArray()
+        )
+    )
     WallService.printAllPosts()
 }
